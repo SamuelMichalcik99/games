@@ -1,0 +1,245 @@
+/* GAME INIT */
+const gameBoard = document.getElementById("game-board");
+const context = gameBoard.getContext("2d");
+const actualScoreEl = document.getElementById("actual-score");
+const HighestScoreEl = document.getElementById("highest-score");
+const resetBtn = document.getElementById("reset-btn");
+const pauseBtn = document.getElementById("pause-btn");
+const biteSound = document.getElementById("bite-sound");
+const playIcon = document.getElementById("play-icon");
+const pauseIcon = document.getElementById("pause-icon");
+const boardWidth = gameBoard.width;
+const boardHeight = gameBoard.height;
+const boardColor = "#f2f2f2";
+const fieldSize = 20;
+const snakeColor = "#00ac17";
+const snakeBorder = "#2d2d2d";
+const foodColor = "red";
+
+let running = false;
+let paused = false;
+let gameOver = false;
+let directionChanged = false;
+let xVelocity = fieldSize;
+let yVelocity = 0;
+let foodX = 0;
+let foodY = 0;
+let actualScore = 0;
+let highestScore = 0;
+let tickSpeed = 100;
+let gameTimer = null;
+
+let snake = [
+    {x:fieldSize * 3, y:0},
+    {x:fieldSize * 2, y:0},
+    {x:fieldSize, y:0},
+    {x:0, y:0}
+]
+
+window.addEventListener("keydown", changeDirection);
+resetBtn.addEventListener("click", resetGame);
+pauseBtn.addEventListener("click", pauseGame);
+
+gameStart();
+
+
+/* FUNCTIONS DEFINITIONS */
+function gameStart() {
+    running = true;
+    paused = false;
+    gameOver = false;
+    actualScoreEl.textContent = actualScore;
+    generateFood();
+    printFood();
+    nextTick();
+};
+
+function nextTick() {
+    if(running && !paused){
+        gameTimer = setTimeout(()=>{
+            directionChanged = false;
+            clearBoard();
+            printFood();
+            moveSnake();
+            printSnake();
+            checkGameOver();
+            if(!gameOver) {
+                nextTick();
+            } else {
+                displayGameOver();
+            }
+        }, tickSpeed);
+    }
+};
+
+function clearBoard() {
+    context.fillStyle = boardColor;
+    context.fillRect(0, 0, boardWidth, boardHeight);
+};
+
+function generateFood() {
+    function randomFood(max){
+        const randomNumber = Math.round((Math.random() * max) / fieldSize) * fieldSize;
+        return randomNumber;
+    }
+    foodX = randomFood(boardWidth - fieldSize);
+    foodY = randomFood(boardHeight - fieldSize);
+};
+
+function printFood() {
+    context.fillStyle = foodColor;
+    context.fillRect(foodX, foodY, fieldSize, fieldSize);
+};
+
+function moveSnake() {
+    const head = {x: snake[0].x + xVelocity,
+                  y: snake[0].y + yVelocity};
+    snake.unshift(head);
+    if(snake[0].x == foodX && snake[0].y == foodY) {
+        actualScore++;
+        actualScoreEl.textContent = actualScore;
+        generateFood();
+        tickSpeed = tickSpeed * 0.99;
+    } else {
+        snake.pop();
+    }
+};
+
+function printSnake() {
+    context.fillStyle = snakeColor;
+    context.strokeStyle = snakeBorder;
+    snake.forEach(snakePart => {
+        context.fillRect(snakePart.x, snakePart.y, fieldSize, fieldSize);
+        context.strokeRect(snakePart.x, snakePart.y, fieldSize, fieldSize);
+    })
+};
+
+function changeDirection(event) {
+    //prevent to change direction more than once in one tick (snake would eat itself)
+    if (directionChanged) {
+        return;
+    }
+
+    const keyPressed = event.keyCode;
+    const leftKey = 37;
+    const rightKey = 39;
+    const upKey = 38;
+    const downKey = 40;
+
+    const goingLeft = (xVelocity == -fieldSize);
+    const goingRight = (xVelocity == fieldSize);
+    const goingUp = (yVelocity == -fieldSize);
+    const goingDown = (yVelocity == fieldSize);
+
+    // change direction control
+    switch(true) {
+        case(keyPressed == leftKey && !goingRight):
+            xVelocity = -fieldSize;
+            yVelocity = 0;
+            directionChanged = true;
+            break;
+        case(keyPressed == rightKey && !goingLeft):
+            xVelocity = fieldSize;
+            yVelocity = 0;
+            directionChanged = true;
+            break;
+        case(keyPressed == upKey && !goingDown):
+            xVelocity = 0;
+            yVelocity = -fieldSize;
+            directionChanged = true;
+            break;
+        case(keyPressed == downKey && !goingUp):
+            xVelocity = 0;
+            yVelocity = fieldSize;
+            directionChanged = true;
+            break;
+    }
+};
+
+function checkGameOver() {
+    // check if the snake did not exceed the game board
+    switch(true) {
+        case (snake[0].x < 0):
+            running = false;
+            gameOver = true;
+            break;
+        case (snake[0].x >= boardWidth):
+            running = false;
+            gameOver = true;
+            break;    
+        case (snake[0].y < 0):
+            running = false;
+            gameOver = true;
+            break;
+        case (snake[0].y >= boardHeight):
+            running = false;
+            gameOver = true;
+            break;   
+    }
+
+    // check if the snake does not eat itself
+    for(let i = 1; i < snake.length; i++) {
+        if(snake[i].x == snake[0].x && snake[i].y == snake[0].y) {
+            let bodyPartsRemoved = snake.length - i;
+            actualScore = actualScore - bodyPartsRemoved;
+            actualScoreEl.textContent = actualScore;
+            snake = snake.slice(0, i);
+            biteSound.play();
+            break;
+        }
+    }
+};
+
+function displayGameOver() {
+    context.font = "32px Caveat Brush";
+    context.fillStyle = "#2d2d2d";
+    context.textAlign = "center";
+    context.fillText("GAME OVER!", boardWidth / 2, boardHeight / 2);
+    running = false;
+    gameOver = true;
+
+    if(actualScore > highestScore) {
+        highestScore = actualScore;
+        HighestScoreEl.textContent = highestScore;
+    }
+};
+
+function pauseGame() {
+    paused = !paused;
+
+    if (running && paused) {
+        playIcon.style.display = "inline";
+        pauseIcon.style.display = "none";
+    } else {
+        playIcon.style.display = "none";
+        pauseIcon.style.display = "inline";
+    }
+
+    if(paused == false) {
+        nextTick();
+    }
+}
+
+function resetGame() {
+    actualScore = 0;
+    xVelocity = fieldSize;
+    yVelocity = 0;
+    tickSpeed = 100;
+    snake = [
+        {x:fieldSize * 4, y:0},
+        {x:fieldSize * 3, y:0},
+        {x:fieldSize * 2, y:0},
+        {x:fieldSize, y:0},
+        {x:0, y:0}
+    ]
+
+    playIcon.style.display = "none";
+    pauseIcon.style.display = "inline";
+
+    clearTimeout(gameTimer);
+    gameStart();
+};
+
+
+
+

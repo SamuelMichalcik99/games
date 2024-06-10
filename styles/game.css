@@ -1,0 +1,64 @@
+/* WRAPPER */
+#web-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    padding: 50px;
+    background-color: var(--mydgrey);
+    color: var(--myorange);
+}
+
+#game-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+}
+
+
+/* GAMEBOARD */
+#game-board {
+    border: 5px solid var(--myorange);
+    background-color: var(--mylgrey);
+}
+
+
+/* SCORE AND RESET BTN*/
+#score-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.inside-row-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    column-gap: 5px;
+}
+
+#actual-score {
+    color: var(--mylgrey);
+}
+
+#highest-score {
+    color: var(--mylgrey);
+}
+
+#play-icon {
+    display: none;
+}
+
+#pause-icon {
+    display: inline;
+}
