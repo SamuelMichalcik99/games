@@ -1,2 +1,3 @@
 /.git
+/.vscode
 /src/db_config.php
