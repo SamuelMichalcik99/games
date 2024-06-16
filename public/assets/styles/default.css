@@ -1,4 +1,7 @@
-@import url("/styles/game.css");
+@import url("index.css");
+@import url("secured.css");
+@import url("header.css");
+@import url("game.css");
 
 :root {
     --mygreen: #00ac17;
@@ -26,7 +29,7 @@ h1,
     font-style: normal;
     font-size: 64px;
     line-height: 1.6em;
-    word-spacing: 0.2em;
+    word-spacing: 0.15em;
     letter-spacing: 0.1em;
     text-align: center;
     text-decoration: none;
@@ -40,7 +43,7 @@ h2,
     font-style: normal;
     font-size: 32px;
     line-height: 1.6em;
-    word-spacing: 0.2em;
+    word-spacing: 0.15em;
     letter-spacing: 0.1em;
     text-align: center;
     text-decoration: none;
@@ -54,7 +57,7 @@ h3,
     font-style: normal;
     font-size: 24px;
     line-height: 1.6em;
-    word-spacing: 0.2em;
+    word-spacing: 0.1em;
     letter-spacing: 0.1em;
     text-align: justify;
     text-decoration: none;
@@ -67,7 +70,7 @@ h3,
     font-style: normal;
     font-size: 20px;
     line-height: 1.6em;
-    word-spacing: 0.2em;
+    word-spacing: 0.15em;
     letter-spacing: 0.1em;
     text-align: justify;
     text-decoration: none;
@@ -80,7 +83,7 @@ h3,
     font-style: normal;
     font-size: 16px;
     line-height: 1.6em;
-    word-spacing: 0.2em;
+    word-spacing: 0.1em;
     letter-spacing: 0.1em;
     text-align: justify;
     text-decoration: none;
@@ -96,7 +99,6 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
-    margin-top: 20px;
     background-color: var(--mylgrey);
     
     font-family: "Poppins", sans-serif;
@@ -118,4 +120,17 @@ button:hover {
     background-color: var(--myorange);
     color: var(--mylgrey);
     cursor: pointer;
+}
+
+#web-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    padding: 50px;
+    background-color: var(--mydgrey);
+    color: var(--myorange);
 }

@@ -2,7 +2,7 @@
 const gameBoard = document.getElementById("game-board");
 const context = gameBoard.getContext("2d");
 const actualScoreEl = document.getElementById("actual-score");
-const HighestScoreEl = document.getElementById("highest-score");
+const highestScoreEl = document.getElementById("highest-score");
 const resetBtn = document.getElementById("reset-btn");
 const pauseBtn = document.getElementById("pause-btn");
 const biteSound = document.getElementById("bite-sound");
@@ -30,17 +30,15 @@ let tickSpeed = 100;
 let gameTimer = null;
 
 let snake = [
-    {x:fieldSize * 3, y:0},
-    {x:fieldSize * 2, y:0},
-    {x:fieldSize, y:0},
-    {x:0, y:0}
+    {x:fieldSize * 3, y:240},
+    {x:fieldSize * 2, y:240},
+    {x:fieldSize, y:240},
+    {x:0, y:240}
 ]
 
 window.addEventListener("keydown", changeDirection);
 resetBtn.addEventListener("click", resetGame);
 pauseBtn.addEventListener("click", pauseGame);
-
-gameStart();
 
 
 /* FUNCTIONS DEFINITIONS */
@@ -115,7 +113,7 @@ function printSnake() {
 };
 
 function changeDirection(event) {
-    //prevent to change direction more than once in one tick (snake would eat itself)
+    // prevent to change direction more than once in one tick (snake would eat itself)
     if (directionChanged) {
         return;
     }
@@ -130,6 +128,11 @@ function changeDirection(event) {
     const goingRight = (xVelocity == fieldSize);
     const goingUp = (yVelocity == -fieldSize);
     const goingDown = (yVelocity == fieldSize);
+
+    // prevent the default action (scrolling) for arrow keys
+    if ([leftKey, rightKey, upKey, downKey].includes(keyPressed)) {
+        event.preventDefault();
+    }
 
     // change direction control
     switch(true) {
@@ -198,14 +201,24 @@ function displayGameOver() {
     running = false;
     gameOver = true;
 
+    playIcon.style.display = "inline";
+    pauseIcon.style.display = "none";
+
     if(actualScore > highestScore) {
         highestScore = actualScore;
-        HighestScoreEl.textContent = highestScore;
+        highestScoreEl.textContent = highestScore;
+        updateHighestScore(highestScore);
+        updateRecordScore(highestScore);
     }
 };
 
 function pauseGame() {
     paused = !paused;
+
+    if(gameOver) {
+        resetGame();
+        return;
+    }
 
     if (running && paused) {
         playIcon.style.display = "inline";
@@ -226,11 +239,11 @@ function resetGame() {
     yVelocity = 0;
     tickSpeed = 100;
     snake = [
-        {x:fieldSize * 4, y:0},
-        {x:fieldSize * 3, y:0},
-        {x:fieldSize * 2, y:0},
-        {x:fieldSize, y:0},
-        {x:0, y:0}
+        {x:fieldSize * 4, y:240},
+        {x:fieldSize * 3, y:240},
+        {x:fieldSize * 2, y:240},
+        {x:fieldSize, y:240},
+        {x:0, y:240}
     ]
 
     playIcon.style.display = "none";
@@ -239,7 +252,6 @@ function resetGame() {
     clearTimeout(gameTimer);
     gameStart();
 };
-
 
 
 
