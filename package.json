@@ -1,0 +1,19 @@
+{
+  "name": "multiplayer-games",
+  "version": "1.0.0",
+  "description": "Web application with singleplayer games: SNAKE, MINES, TETRIS, SUDOKU and multiplayer games: BATTLESHIP, PONG.. Used technologies: HTML, CSS, PHP, JS, MYSQL, SOCKET.IO + EXPRESS in enviroment NODE.JS. Link: https://www.games.samuelmichalcik.sk",
+  "main": "ws/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ws/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Samuel Michalcik",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5"
+  }
+}

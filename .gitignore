@@ -1,0 +1,4 @@
+/.git
+/.vscode
+/config/db_config.php
+/node_modules

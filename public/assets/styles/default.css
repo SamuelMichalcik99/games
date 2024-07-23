@@ -1,0 +1,138 @@
+@import url("index.css");
+@import url("secured.css");
+@import url("header.css");
+@import url("games.css");
+
+:root {
+    --mygreen: #00ac17;
+    --myorange: #ff7f0f;
+    --mylgrey: #f2f2f2;
+    --mymgrey: #cccccc;
+    --mydgrey: #2d2d2d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1,
+.title-L {
+    font-family: "Caveat Brush", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 64px;
+    line-height: 1.6em;
+    word-spacing: 0.15em;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-decoration: none;
+    color: var(--myorange);
+}
+
+h2,
+.title-M {
+    font-family: "Caveat Brush", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 32px;
+    line-height: 1.6em;
+    word-spacing: 0.15em;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-decoration: none;
+    color: var(--myorange);
+}
+
+h3,
+.title-S {
+    font-family: "Caveat Brush", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1.6em;
+    word-spacing: 0.1em;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-decoration: none;
+    color: var(--myorange);
+}
+
+.text-L {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1.6em;
+    word-spacing: 0.15em;
+    letter-spacing: 0.1em;
+    text-align: justify;
+    text-decoration: none;
+    color: var(--mylgrey);
+}
+
+.text-M {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.6em;
+    word-spacing: 0.1em;
+    letter-spacing: 0.1em;
+    text-align: justify;
+    text-decoration: none;
+    color: var(--mylgrey);
+}
+
+strong,
+.strong-text {
+    font-weight: 400;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--mylgrey);
+    
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.6em;
+    word-spacing: 0.2em;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-decoration: none;
+    color: var(--mydgrey);
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.2);
+    transition-duration: 600ms;
+    background-color: var(--myorange);
+    color: var(--mylgrey);
+    cursor: pointer;
+}
+
+#web-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 30px;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    padding: 0px 20px;
+    background-color: var(--mydgrey);
+    color: var(--myorange);
+}

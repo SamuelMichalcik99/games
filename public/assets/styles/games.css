@@ -1,0 +1,219 @@
+/* WRAPPER */
+#game-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+}
+
+
+/* GAMEBOARDS */
+#snake-board,
+#tetris-board {
+    background-color: var(--mymgrey);
+}
+
+#mines-board,
+#sudoku-board {
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--mylgrey);
+}
+
+
+/* SCORE AND TIME PANEL */
+#score-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.inside-row-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    column-gap: 5px;
+}
+
+.inside-column-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 5px;
+    column-gap: 10px;
+}
+
+#mines-number,
+#actual-time,
+#actual-score,
+#best-time,
+#highest-score {
+    color: var(--mylgrey);
+}
+
+
+/* BUTTONS CONTROL PANEL */
+#play-icon {
+    display: none;
+}
+
+#pause-icon {
+    display: inline;
+}
+
+#game-control-btns {
+    margin-top: 20px;
+}
+
+
+/* MINES */
+#game-flag-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 0px;
+    margin-bottom: 100px;
+}
+
+#flag-btn:hover {
+    background-color: var(--mylgrey);
+    transform: none;
+}
+
+.mines-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.mines-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border: 1px solid var(--mylgrey);
+    background-color: var(--mymgrey);
+    font-family: "Caveat Brush", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1.6em;
+    word-spacing: 0.1em;
+    letter-spacing: 0.1em;
+    text-align: justify;
+    text-decoration: none;
+    color: var(--mydgrey);
+    cursor: pointer;
+}
+
+.mines-cell-revealed {
+    background-color: var(--mylgrey);
+    pointer-events: none;
+    cursor: none;
+}
+
+.m1 {
+    color: #1a85ff;
+}
+
+.m2 {
+    color: #00cf26;
+}
+
+.m3 {
+    color: #f19800;
+}
+
+.m4 {
+    color: #ff3be8;
+}
+
+.m5 {
+    color: #FF0000;
+}
+
+.m6 {
+    color: #780000;
+}
+
+.m7 {
+    color: #450072;
+}
+
+.m8 {
+    color: #000000;
+}
+
+.notif-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+
+.notif-won {
+    color: green !important;
+}
+
+.notif-lost {
+    color: red !important;
+}
+
+/* TETRIS */
+.tetris-next-canvas-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* SUDOKU */
+.sudoku-block-row,
+.sudoku-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.sudoku-block {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--mydgrey);
+}
+
+.sudoku-cell,
+.sudoku-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--mydgrey);
+    background-color: var(--mymgrey);
+    font-family: "Caveat Brush", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1.6em;
+    word-spacing: 0.1em;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-decoration: none;
+    color: var(--mydgrey);
+    cursor: text;
+}
+
+.sudoku-input {
+    background-color: var(--mylgrey);
+}
